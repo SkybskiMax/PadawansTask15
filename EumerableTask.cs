@@ -38,7 +38,7 @@ namespace PadawansTask15
         {
             if (data == null)
                 throw new ArgumentNullException();
-            int[] answer = data.Select(s => s!=null ? s.Length : 0).ToArray();
+            int[] answer = data.Select(s => s != null ? s.Length : 0).ToArray();
             return answer;
         }
 
@@ -56,7 +56,7 @@ namespace PadawansTask15
         {
             if (data == null)
                 throw new ArgumentNullException();
-            long[] answer = data.Select(s => (long)s*s).ToArray();
+            long[] answer = data.Select(s => (long)s * s).ToArray();
             return answer;
         }
 
@@ -81,7 +81,7 @@ namespace PadawansTask15
                 throw new ArgumentNullException();
             data =
                 from word in data
-                where word.StartsWith(prefix) == true
+                where word != null && word.ToLower().StartsWith(prefix.ToLower()) == true
                 select word;
             return data;
         }
@@ -119,9 +119,11 @@ namespace PadawansTask15
         /// </example>
         public int GetSumOfAllIntegers(object[] data)
         {
+            if (data == null)
+                throw new ArgumentNullException();
             var sum = from item in data
-                        where item.GetType() == typeof(int)
-                        select item;
+                      where item != null && item.GetType() == typeof(int)
+                      select item;
             int answer = sum.Cast<int>().ToList().Sum();
             return answer;
         }
